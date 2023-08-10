@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import UsersList from "../components/UsersList"
 import { toast } from "react-toastify"
 import { Link, useNavigate } from "react-router-dom"
@@ -43,6 +43,8 @@ const Home = () => {
     }
   }
 
+  const cachedUsers = useMemo(() => data.users, [data])
+
   if(!loading) {
     return <h4 className="alert alert-success text-center mt-2">Loading...</h4>
   }
@@ -66,7 +68,7 @@ const Home = () => {
             </thead>
             <tbody >
 
-                {data.users?.map(user => 
+                {cachedUsers?.map(user => 
                 <UsersList key={user.client_id} 
                 user={user} 
                 deleteUser={deleteUser}/>)}
