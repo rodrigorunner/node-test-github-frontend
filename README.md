@@ -4,7 +4,9 @@
 
 <ol>
   <li>Clonar o projeto para a máquina local;</li>
-  <li>Criar um arquivo .env na raíz do projeto;</li>
-  <li>Dentro do arquivo .env criar uma variável com o nome: REACT_APP_SERVERURL com o endereço do host.</li>
+  <li>Rodar o comando <strong>npm install</strong> para instalar às dependências do projeto;</li>
+  <li>Renomear o arquivo <i>.env-bkp</i> para <i>.env</i> na raíz do projeto;</li>
 </ol>
+
+  <p><strong>Obs: </strong>Após renomear o arquivo é necessário reiniciar a aplicação.</p>
 
