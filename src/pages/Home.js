@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 const Home = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false) 
+  const [query, setQuery] = useState("")
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -49,9 +50,29 @@ const Home = () => {
     return <h4 className="alert alert-success text-center mt-2">Loading...</h4>
   }
 
+  const keys = [
+    "client_name",
+    "client_email", 
+    "client_whatsapp", 
+    "city", 
+    "street", 
+    "zipcode"
+  ]
+
     return (
       <section className="mt-2">
-        <Link className="btn btn-dark m-3" to="/register"><i className="fa-solid fa-plus"></i></Link>
+
+        <div className="d-flex justify-content-between align-items-center">
+          <Link className="btn btn-dark m-3" to="/register"><i className="fa-solid fa-plus"></i></Link>
+
+          <input
+          style={{width: '300px'}}
+          type="text"
+          value={query}
+          className="form-control"
+          onChange={e => setQuery(e.target.value)}/>
+        </div>
+
         <div className="table-responsive">
           <table className="table table-striped">
             <thead className="table-dark">
@@ -68,7 +89,9 @@ const Home = () => {
             </thead>
             <tbody >
 
-                {cachedUsers?.map(user => 
+                {cachedUsers?.filter(user => 
+                  keys.some(key => user[key].toLowerCase().includes(query)))
+                .map(user => 
                 <UsersList key={user.client_id} 
                 user={user} 
                 deleteUser={deleteUser}/>)}
